@@ -20,5 +20,7 @@ const styles = StyleSheet.create({
 
   text: {
     color: '#fff',
+    marginBottom: 300,
+    fontSize: 25,
   }
 });
