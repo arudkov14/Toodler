@@ -4,8 +4,12 @@ import Boards from './src/components/Boards/Boards';
 import Data from './src/resources/data.json';
 
 export default function App() {
-  var data = { Data };
-  console.log(data);
+  var data = JSON.parse(JSON.stringify(Data));
+  //console.log(data.boards);
+  for(var i = 0; i < data.boards.length; i++) {
+    console.log(data.boards[i].name);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -16,7 +20,6 @@ export default function App() {
         <Button color='#515b6b' title='View Boards' onPress={() => {
           Alert.alert('Blabla');
           Vibration.vibrate(50);
-
         }}/>
 
         <Button color='#515b6b' title='Create Board' onPress={() => {
