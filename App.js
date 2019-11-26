@@ -1,24 +1,62 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Vibration } from 'react-native';
+import Boards from './src/components/Boards/Boards';
+import Data from './src/resources/data.json';
 
 export default function App() {
+  var data = JSON.parse(JSON.stringify(Data));
+  //console.log(data.boards);
+  for(var i = 0; i < data.boards.length; i++) {
+    console.log(data.boards[i].name);
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome to Toodler</Text>
+      <View style={styles.headerContainer}>
+        <Text style={styles.text}>Welcome to Toodler</Text>
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Button color='#515b6b' title='View Boards' onPress={() => {
+          Alert.alert('Blabla');
+          Vibration.vibrate(50);
+        }}/>
+
+        <Button color='#515b6b' title='Create Board' onPress={() => {
+          Alert.alert('Blabla');
+          Vibration.vibrate(50);
+        }}/>
+      </View>
     </View>
   );
+  //<Boards />
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     //backgroundColor: '#fffg',
     backgroundColor: '#252c38',
-    alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  headerContainer: {
+    flex: 0.5,
+    alignItems: 'center',
+    marginTop: -100,
   },
 
   text: {
     color: '#fff',
+    fontSize: 25,
+  },
+
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 15,
+    marginTop: -400,
   }
 });
