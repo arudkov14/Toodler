@@ -6,7 +6,7 @@ const Boards = () => {
 		<View>
 			<Text style={styles.text}> Here are some boards </Text>
 		</View>
-	)
+	);
 }
 
 const styles = StyleSheet.create({
