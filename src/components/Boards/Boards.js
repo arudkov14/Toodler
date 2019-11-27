@@ -12,10 +12,11 @@ class Boards extends React.Component {
 			currentBoardId: 1,
 			numberOfBoards: Data.boards.length,
 		};
+		this.nextBoard = this.nextBoard.bind(this);
 	}
 
-	componentDidUpdate(nextProps) {
-		const differentTitle = this.props.currentBoardId === nextProps.currentBoardId;
+	shouldComponentUpdate(nextState) {
+		const differentTitle = this.state.currentBoardId !== nextState.currentBoardId;
 		console.log(differentTitle)
     return differentTitle;
 	}
@@ -28,6 +29,7 @@ class Boards extends React.Component {
 				currentBoardId: currentBoardId + 1
 			});
 		}
+		this.forceUpdate();
 	}
 
 	prevBoard() {
@@ -37,6 +39,7 @@ class Boards extends React.Component {
 				currentBoardId: currentBoardId - 1
 			});
 		}
+		this.forceUpdate();
 	}
 
 	render() {

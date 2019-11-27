@@ -8,7 +8,7 @@ class Board extends React.Component {
 		const { id } = this.props;
 		const { data } = this.props;
 
-		console.log(data)
+		console.log(navigation.getParam('id'));
 
 		return (
 			<View style={ styles.container }>

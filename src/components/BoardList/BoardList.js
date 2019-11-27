@@ -29,5 +29,4 @@ const BoardList = ({ navigation: { navigate }, boardId, data }) => {
 	)
 }
 
-
 export default BoardList;
