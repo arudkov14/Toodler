@@ -12,9 +12,8 @@ const BoardList = ({ navigation: { navigate }, boardId, data }) => {
 				renderItem={({ item: { id, name, thumbnailPhoto }}) => {
 					if(id == boardId) {
 						return (
-							<TouchableHighlight onPress={
-								function(navigation, id, data) {
-									navigate('Board', { navigation: navigation, id: id, data: data })
+							<TouchableHighlight onPress={()=> {
+									navigate('Board', { navigation: navigate, id: id, data: data, a: 30 })
 							 	}
 							}>
 								<View>
