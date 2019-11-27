@@ -10,7 +10,7 @@ const Main = ({ navigation: { navigate } }) => {
 
 			<View style={styles.buttonContainer}>
 				<Button color='#515b6b' title='View Boards' onPress={() => {
-					navigate('Boards');
+					navigate('Boards', { navigation: navigate });
 					//Alert.alert('Blabla');
 					//Vibration.vibrate(50);
 				}}/>
