@@ -42,11 +42,12 @@ class Boards extends React.Component {
 	render() {
 		console.log(this.state.currentBoardId)
 		const { currentBoardId } = this.state;
+		const { navigation } = this.props;
 
 		return(
 			<View style={styles.container}>
 				<View style={styles.boardContainer}>
-					<BoardList boardId={ currentBoardId } boards={ Data.boards } />
+					<BoardList navigation={ navigation } boardId={ currentBoardId } data={ Data } />
 					<Button title='<' onPress={ () => { this.prevBoard() }}/>
 					<Button title='>' onPress={ () => { this.nextBoard() }}/>
 				</View>
