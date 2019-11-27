@@ -1,50 +1,58 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import SwipeableViews from 'react-swipeable-views-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import BoardList from '../BoardList/BoardList';
 import Data from '../../resources/data.json';
+import styles from './styles.js';
 
 class Boards extends React.Component {
-	//var data = JSON.parse(JSON.stringify(Data));
-  //console.log(data.boards);
-  /*for(var i = 0; i < data.boards.length; i++) {
-    console.log(data.boards[i].name);
-  }*/
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentBoardId: 1,
+			numberOfBoards: Data.boards.length,
+		};
+	}
 
-	//This goes in render() eventually
-	//<Text> { data.boards[0].name } </Text>
-	//<Image style={{width: 100, height: 100}} source={data.boards[0].thumbnailPhoto} />
+	componentDidUpdate(nextProps) {
+		const differentTitle = this.props.currentBoardId === nextProps.currentBoardId;
+		console.log(differentTitle)
+    return differentTitle;
+	}
+
+	nextBoard() {
+		const { currentBoardId } = this.state;
+		const { numberOfBoards } = this.state;
+		if(currentBoardId < numberOfBoards) {
+			this.setState({
+				currentBoardId: currentBoardId + 1
+			});
+		}
+	}
+
+	prevBoard() {
+		const { currentBoardId } = this.state;
+		if(currentBoardId > 1) {
+			this.setState({
+				currentBoardId: currentBoardId - 1
+			});
+		}
+	}
 
 	render() {
+		console.log(this.state.currentBoardId)
+		const { currentBoardId } = this.state;
+
 		return(
 			<View style={styles.container}>
 				<View style={styles.boardContainer}>
-
+					<BoardList boardId={ currentBoardId } boards={ Data.boards } />
+					<Button title='<' onPress={ () => { this.prevBoard() }}/>
+					<Button title='>' onPress={ () => { this.nextBoard() }}/>
 				</View>
 			</View>
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-    flex: 1,
-    backgroundColor: '#252c38',
-    justifyContent: 'center',
-  },
-
-	boardContainer: {
-		flex: 0.5,
-		marginTop: -100,
-		alignSelf: 'center',
-		borderRadius: 6,
-		borderWidth: 0.5,
-		borderColor: 'white',
-		width: 250,
-		height: 100,
-	},
-
-	text: {
-		color: '#b4c0d4',
-	}
-});
 
 export default Boards;
