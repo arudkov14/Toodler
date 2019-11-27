@@ -28,8 +28,8 @@ class Boards extends React.Component {
 			this.setState({
 				currentBoardId: currentBoardId + 1
 			});
+			this.forceUpdate();
 		}
-		this.forceUpdate();
 	}
 
 	prevBoard() {
@@ -38,8 +38,8 @@ class Boards extends React.Component {
 			this.setState({
 				currentBoardId: currentBoardId - 1
 			});
+			this.forceUpdate();
 		}
-		this.forceUpdate();
 	}
 
 	render() {

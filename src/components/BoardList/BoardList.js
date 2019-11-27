@@ -5,28 +5,20 @@ import BoardThumbnail from '../BoardThumbnail/BoardThumbnail';
 import styles from './styles';
 
 const BoardList = ({ navigation: { navigate }, boardId, data }) => {
-	return(
+	var board = data.boards[boardId - 1];
+
+	return (
 		<View style={{ flex: 1 }}>
-			<FlatList
-				numColumns={1} data={ data.boards }
-				renderItem={({ item: { id, name, thumbnailPhoto }}) => {
-					if(id == boardId) {
-						return (
-							<TouchableHighlight onPress={
-								function(navigation, id, data) {
-									navigate('Board', { navigation: navigation, id: id, data: data })
-							 	}
-							}>
-								<View>
-									<Text style={ styles.boardTitle }> { name } </Text>
-									<BoardThumbnail image={ thumbnailPhoto } />
-								</View>
-							</TouchableHighlight>
-						);
-				 }
-				}} keyExtractor={(image) => image.name} />
+			<TouchableHighlight onPress={()=> {
+			  navigate('Board', { navigation: navigate, id: boardId, data: data})
+			}}>
+				<View>
+					<Text style={ styles.boardTitle }> { board.name } </Text>
+					<BoardThumbnail image={ board.thumbnailPhoto } />
+				</View>
+		  </TouchableHighlight>
 		</View>
-	)
+	);
 }
 
 export default BoardList;
