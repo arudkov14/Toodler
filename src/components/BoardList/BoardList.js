@@ -4,8 +4,15 @@ import SwipeableViews from 'react-swipeable-views-native';
 import BoardThumbnail from '../BoardThumbnail/BoardThumbnail';
 import styles from './styles';
 
-const BoardList = ({ navigation: { navigate }, boardId, data }) => {
-	var board = data.boards[boardId - 1];
+const BoardList = ({ navigation: { navigate }, boardId, boardIndex, data }) => {
+	var board = data.boards[boardIndex];
+
+	if(board === undefined) {
+		return (
+			<View>
+			</View>
+		);
+	}
 
 	return (
 		<View style={{ flex: 1 }}>

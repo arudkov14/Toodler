@@ -16,8 +16,7 @@ const Main = ({ navigation: { navigate } }) => {
 				}}/>
 
 				<Button color='#515b6b' title='Create Board' onPress={() => {
-					Alert.alert('Blabla');
-					Vibration.vibrate(50);
+					navigate('CreateBoard', { navigation: navigate });
 				}}/>
 			</View>
 		</View>
