@@ -11,11 +11,10 @@ class Board extends React.Component {
 		var data = navigation.getParam('data');
 		var board = navigation.getParam('id');
 
-		console.log(board)
 
 		return (
 			<View style={ styles.container }>
-				<ListView board={ board } />
+				<ListView navigation={ navigation } board={ board } />
 			</View>
 		);
 	}
