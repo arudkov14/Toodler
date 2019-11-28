@@ -4,7 +4,7 @@ import SwipeableViews from 'react-swipeable-views-native';
 import BoardThumbnail from '../BoardThumbnail/BoardThumbnail';
 import styles from './styles';
 
-const BoardList = ({ navigation: { navigate }, boardId, boardIndex, data }) => {
+const BoardView = ({ navigation: { navigate }, boardId, boardIndex, data }) => {
 	var board = data.boards[boardIndex];
 
 	if(board === undefined) {
@@ -28,4 +28,4 @@ const BoardList = ({ navigation: { navigate }, boardId, boardIndex, data }) => {
 	);
 }
 
-export default BoardList;
+export default BoardView;

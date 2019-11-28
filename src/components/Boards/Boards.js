@@ -1,7 +1,7 @@
 import React from 'react';
 import SwipeableViews from 'react-swipeable-views-native';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import BoardList from '../BoardList/BoardList';
+import BoardView from '../BoardView/BoardView';
 import Data from '../../resources/data.json';
 import styles from './styles.js';
 
@@ -81,7 +81,7 @@ class Boards extends React.Component {
 			<View style={styles.container}>
 				<View style={styles.boardContainer}>
 					<Button title='X' onPress={ () => { this.deleteBoard() }} />
-					<BoardList navigation={ navigation } boardId={ this.findCurrentBoardId() }
+					<BoardView navigation={ navigation } boardId={ this.findCurrentBoardId() }
 					boardIndex={ currentBoardId } data={ Data } />
 					<Button title='<' onPress={ () => { this.prevBoard() }}/>
 					<Button title='>' onPress={ () => { this.nextBoard() }}/>
