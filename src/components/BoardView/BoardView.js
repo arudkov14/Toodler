@@ -17,7 +17,7 @@ const BoardView = ({ navigation: { navigate }, boardId, boardIndex, data }) => {
 	return (
 		<View style={{ flex: 1 }}>
 			<TouchableHighlight onPress={()=> {
-			  navigate('Board', { navigation: navigate, id: boardId, data: data})
+			  navigate('Board', { navigation: navigate, id: boardId})
 			}}>
 				<View>
 					<Text style={ styles.boardTitle }> { board.name } </Text>
