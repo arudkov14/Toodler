@@ -9,7 +9,7 @@ const ListView = (board) => {
     <View style={{ flex: 1 }}>
       <FlatList
         numColumns={1}
-        data={Data.lists }
+        data={ Data.lists }
         renderItem={ ({ item: { id, name, color, boardId}}) => {
           if(boardId == board.board) {
             return (
