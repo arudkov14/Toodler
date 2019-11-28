@@ -7,6 +7,7 @@ import CreateBoard from '../components/CreateBoard/CreateBoard';
 import Boards from '../components/Boards/Boards';
 import BoardView from '../components/BoardView/BoardView';
 import Board from '../components/Board/Board';
+import List from '../components/List/List';
 
 const StackNavigator = createStackNavigator({
 	Main,
@@ -14,6 +15,7 @@ const StackNavigator = createStackNavigator({
 	Boards,
 	BoardView,
 	Board,
+	List,
 });
 
 export default createAppContainer(StackNavigator);
