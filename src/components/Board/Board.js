@@ -7,10 +7,7 @@ import Data from '../../resources/data.json';
 class Board extends React.Component {
 	render() {
 		const { navigation } = this.props;
-
-		var data = navigation.getParam('data');
 		var board = navigation.getParam('id');
-
 
 		return (
 			<View style={ styles.container }>

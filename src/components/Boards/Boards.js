@@ -36,18 +36,21 @@ class Boards extends React.Component {
 		const { numberOfBoards } = this.state;
 		delete Data.boards[currentBoardId];
 
+		Data.boards = Data.boards.filter(function(i) {
+      return i != undefined;
+    });
+
 		var nextBoardId = this.findNextBoardAsc(currentBoardId);
 		if(nextBoardId === undefined || nextBoardId == currentBoardId) {
 			nextBoardId = this.findNextBoardDesc(currentBoardId);
 		}
-		console.log(nextBoardId)
+
 		this.setState({
 			currentBoardId: nextBoardId,
 		});
 	}
 
 	findNextBoardAsc(index) {
-		// Deleted boards will show up in the data as "undefined"
 		for(var i = index + 1; i < Data.boards.length; i++) {
 			if(Data.boards[i] !== undefined) {
 				return i;
