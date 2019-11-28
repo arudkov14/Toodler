@@ -8,11 +8,9 @@ class Board extends React.Component {
 		const { id } = this.props;
 		const { data } = this.props;
 
-		console.log(navigation.getParam('id'));
-
 		return (
 			<View style={ styles.container }>
-				<Text> Here's a fucking board { id } </Text>
+				<Text> Here's a fucking board { navigation.getParam('id') } </Text>
 			</View>
 		);
 	}
