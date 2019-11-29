@@ -9,15 +9,14 @@ class Board extends React.Component {
 		console.log('create')
 	}
 
-	deleteBoard(id, navigation) {
-		const { update } = this.props;
+	deleteBoard(id, navigation, update) {
 		delete Data.boards[this.findBoardIndex(id)];
 		Data.boards = Data.boards.filter(function(i) {
       return i != undefined;
     });
 
-		navigation.navigate('Boards');
-		update;
+		update();
+		navigation.pop();
 	}
 
 	findBoardIndex(id) {
@@ -31,7 +30,10 @@ class Board extends React.Component {
 	render() {
 		const { navigation } = this.props;
 		var id = navigation.getParam('id');
+		var update = navigation.getParam('update');
 		var boardData = Data.boards[this.findBoardIndex(id)];
+
+		console.log('Board: ' + update)
 
 		/*<View style={ styles.boardHeader }>
 			<Text style={ styles.boardHeaderText }> { boardData.name } </Text>
@@ -49,7 +51,7 @@ class Board extends React.Component {
 				 onPress={ () => this.createList() }>
 					<Text style={ styles.createListText }> + </Text>
 				</TouchableOpacity>
-				<Button title='Delete Board' onPress={ () => this.deleteBoard(id, navigation) } />
+				<Button title='Delete Board' onPress={ () => this.deleteBoard(id, navigation, update) } />
 			</View>
 		);
 	}

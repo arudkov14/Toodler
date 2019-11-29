@@ -6,11 +6,10 @@ import Data from '../../resources/data.json';
 import styles from './styles';
 
 class BoardView extends React.Component { //= ({ navigation: { navigate }, boardId, boardIndex, data }) => {
-	update() {
-		console.log('update')
-		this.forceUpdate();
+	updateView() {
+		const { update } = this.props;
+		update();
 	}
-
 	render() {
 		const { navigation } = this.props;
 		const { boardId } = this.props;
@@ -32,7 +31,7 @@ class BoardView extends React.Component { //= ({ navigation: { navigate }, board
 					return (
 						<View>
 							<TouchableHighlight style={ styles.boardContainer } onPress={()=> {
-								navigation.navigate('Board', { navigation: navigation, id: id, update: this.update() })
+								navigation.navigate('Board', { navigation: navigation, id: id, update: () => this.updateView() })
 							}}>
 								<View>
 									<View style={ styles.boardTitleContainer }>
