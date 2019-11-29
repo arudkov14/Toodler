@@ -28,7 +28,7 @@ const ListView = ( {navigation: { navigate }, board} ) => {
           if(boardId == board) {
             return (
               <TouchableHighlight style={{ backgroundColor: color } }
-               onPress={() => {navigate('List', {list: id})}}>
+               onPress={() => { navigate('List', { list: id }) }} >
                 <View style={ styles.list } >
                   <Text style={{
                     backgroundColor: color,

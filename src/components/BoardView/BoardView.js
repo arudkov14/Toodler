@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text, FlatList, TouchableHighlight } from 'react-native';
+import { View, Text, FlatList, TouchableHighlight, useState } from 'react-native';
 import SwipeableViews from 'react-swipeable-views-native';
 import BoardThumbnail from '../BoardThumbnail/BoardThumbnail';
 import styles from './styles';
 
 const BoardView = ({ navigation: { navigate }, boardId, boardIndex, data }) => {
-	var board = data.boards[boardIndex];
+	var boards = data.boards;
 
-	if(board === undefined) {
+	if(boards === undefined) {
 		return (
 			<View>
 			</View>
@@ -15,16 +15,28 @@ const BoardView = ({ navigation: { navigate }, boardId, boardIndex, data }) => {
 	}
 
 	return (
-		<View style={{ flex: 1 }}>
-			<TouchableHighlight onPress={()=> {
-			  navigate('Board', { navigation: navigate, id: boardId})
-			}}>
-				<View>
-					<Text style={ styles.boardTitle }> { board.name } </Text>
-					<BoardThumbnail image={ board.thumbnailPhoto } />
-				</View>
-		  </TouchableHighlight>
-		</View>
+		<FlatList
+			numColumns={2}
+			data={ boards }
+			renderItem={ ({ item: { id, name, thumbnailPhoto }}) => {
+				return (
+					<View>
+						<TouchableHighlight style={ styles.boardContainer } onPress={()=> {
+							navigate('Board', { navigation: navigate, id: id })
+						}}>
+							<View>
+								<View style={ styles.boardTitleContainer }>
+									<Text style={ styles.boardTitle }> { name } </Text>
+								</View>
+								<View style={ styles.thumbnail }>
+									<BoardThumbnail style={ styles.thumbnail } image={ thumbnailPhoto } />
+								</View>
+							</View>
+						</TouchableHighlight>
+					</View>
+				);
+			}}keyExtractor={ board => board.name}
+		/>
 	);
 }
 

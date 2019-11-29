@@ -7,7 +7,6 @@ export default StyleSheet.create({
   },
 
 	inputContainer: {
-
 		alignItems: 'center'
 	},
 

@@ -8,7 +8,7 @@ export default StyleSheet.create({
   },
 
 	boardContainer: {
-		flex: 0.5,
+		flex: 1,
 		marginTop: 100,
 		alignSelf: 'center',
 		borderRadius: 6,
@@ -16,6 +16,17 @@ export default StyleSheet.create({
 		borderColor: 'white',
 		width: 250,
 		height: 100,
+	},
+
+	createBoard: {
+		backgroundColor: '#3a404a',
+		padding: 15,
+		alignItems: 'center',
+	},
+
+	createBoardText: {
+		color: 'white',
+		fontSize: 20,
 	},
 
 	text: {

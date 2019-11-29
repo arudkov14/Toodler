@@ -3,16 +3,27 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
 	boardTitle: {
 		fontSize: 20,
+		color: 'white',
+	},
+
+	boardTitleContainer: {
+		alignItems: 'center',
 	},
 
 	boardContainer: {
-		flex: 0.5,
-		marginTop: 100,
+		marginTop: 20,
+		marginLeft: 20,
 		alignSelf: 'center',
-		borderRadius: 6,
-		borderWidth: 0.5,
-		borderColor: 'white',
-		width: 250,
-		height: 100,
+		justifyContent: 'center',
+		borderRadius: 20,
+		borderWidth: 2,
+		borderColor: 'black',
+		width: 150,
+		height: 'auto',
+		backgroundColor: 'black',
+	},
+
+	thumbnail: {
+		width: 'auto',
 	},
 });

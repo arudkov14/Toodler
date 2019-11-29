@@ -69,7 +69,7 @@ class CreateBoard extends React.Component {
 
 		Alert.alert(boardTitle + ' has been created!');
 		Vibration.vibrate(50);
-		this.props.navigation.navigate('Main');
+		this.props.navigation.navigate('Boards');
 	}
 
 	render() {
@@ -106,11 +106,11 @@ class CreateBoard extends React.Component {
 						<TouchableHighlight style={ styles.photoBox }
 						 onPress={ () => this.takePhoto() } >
 						 <View>
- 						 <Image
- 							 style={ styles.cameraIcon }
- 							 resizeMode='cover'
- 							 source={ require('../../../assets/icon-camera-512.png') }
- 							/>
+	 						 <Image
+	 							 style={ styles.cameraIcon }
+	 							 resizeMode='cover'
+	 							 source={ require('../../../assets/icon-camera-512.png') }
+	 							/>
  							</View>
 						</TouchableHighlight>
 					</View>

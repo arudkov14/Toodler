@@ -1,97 +1,25 @@
 import React from 'react';
 import SwipeableViews from 'react-swipeable-views-native';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, TouchableHighlight } from 'react-native';
 import BoardView from '../BoardView/BoardView';
 import Data from '../../resources/data.json';
 import styles from './styles.js';
 
-class Boards extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			currentBoardId: this.findNextBoardAsc(-1),
-			numberOfBoards: Data.boards.length,
-		};
-	}
+const Boards = ( { navigation: navigate } ) => {
+	//<Button title='X' onPress={ () => { this.deleteBoard() }} />
+	//const { currentBoardId } = this.state;
 
-	nextBoard() {
-		const { currentBoardId } = this.state;
-		const { numberOfBoards } = this.state;
-		if(currentBoardId >= numberOfBoards - 1) { return; }
-		this.setState({
-			currentBoardId: this.findNextBoardAsc(currentBoardId),
-		})
-	}
+	return(
+		<View style={styles.container}>
+			<TouchableHighlight style={ styles.createBoard } onPress={ () => {
+				navigate.navigate('CreateBoard', { navigation: navigate });
+			}}>
+				<Text style={ styles.createBoardText }> + </Text>
+			</TouchableHighlight>
+			<BoardView navigation={ navigate } data={ Data } />
+		</View>
+	);
 
-	prevBoard() {
-		const { currentBoardId } = this.state;
-		if(currentBoardId <= 0) { return;	}
-		this.setState({
-			currentBoardId: this.findNextBoardDesc(currentBoardId),
-		});
-	}
-
-	deleteBoard() {
-		const { currentBoardId } = this.state;
-		const { numberOfBoards } = this.state;
-		delete Data.boards[currentBoardId];
-
-		Data.boards = Data.boards.filter(function(i) {
-      return i != undefined;
-    });
-
-		var nextBoardId = this.findNextBoardAsc(currentBoardId);
-		if(nextBoardId === undefined || nextBoardId == currentBoardId) {
-			nextBoardId = this.findNextBoardDesc(currentBoardId);
-		}
-
-		this.setState({
-			currentBoardId: nextBoardId,
-		});
-	}
-
-	findNextBoardAsc(index) {
-		for(var i = index + 1; i < Data.boards.length; i++) {
-			if(Data.boards[i] !== undefined) {
-				return i;
-			}
-		}
-		return index;
-	}
-
-	findNextBoardDesc(index) {
-		for(var i = index - 1; i >= 0; i--) {
-			if(Data.boards[i] !== undefined) {
-				return i;
-			}
-		}
-		return index;
-	}
-
-	findCurrentBoardId() {
-		const { currentBoardId } = this.state;
-		var currentBoard = Data.boards[currentBoardId];
-		if(currentBoard !== undefined) {
-			return currentBoard.id;
-		}
-	}
-
-	render() {
-		const { currentBoardId } = this.state;
-		const { navigation } = this.props;
-
-		return(
-			<View style={styles.container}>
-				<View style={styles.boardContainer}>
-					<Button title='X' onPress={ () => { this.deleteBoard() }} />
-					<BoardView navigation={ navigation } boardId={ this.findCurrentBoardId() }
-					boardIndex={ currentBoardId } data={ Data } />
-					<Button title='<' onPress={ () => { this.prevBoard() }}/>
-					<Button title='>' onPress={ () => { this.nextBoard() }}/>
-				</View>
-			</View>
-		);
-	}
 }
 
 export default Boards;
