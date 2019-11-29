@@ -3,15 +3,16 @@ import { Text, View, FlatList, TouchableHighlight, TouchableOpacity, Button } fr
 import Data from '../../resources/data.json';
 import styles from './styles.js';
 
-const ListView = ( {navigation: { navigate }, board} ) => {
-  function deleteList(id) {
-    delete Data.lists[getListIndex(id)];
+class ListView extends React.Component { //  = ( {navigation: { navigate }, board} ) => {
+  deleteList(id) {
+    delete Data.lists[this.getListIndex(id)];
     Data.lists = Data.lists.filter(function(i) {
       return i != undefined;
     });
+    this.forceUpdate();
   }
 
-  function getListIndex(id) {
+  getListIndex(id) {
     for(var i = 0; i < Data.lists.length; i++) {
       if(Data.lists[i].id == id) {
         return i;
@@ -19,35 +20,40 @@ const ListView = ( {navigation: { navigate }, board} ) => {
     }
   }
 
-  return (
-    <View>
-      <FlatList
-        numColumns={1}
-        data={ Data.lists }
-        renderItem={ ({ item: { id, name, color, boardId}}) => {
-          if(boardId == board) {
-            return (
-              <TouchableHighlight style={{ backgroundColor: color } }
-               onPress={() => { navigate('List', { list: id }) }} >
-                <View style={ styles.list } >
-                  <Text style={{
-                    backgroundColor: color,
-                    fontSize: 20,
-                  }}>
-                    { name }
-                  </Text>
-                  <TouchableOpacity style={ styles.deleteButton }
-                   onPress={ () => deleteList(id) }>
-                    <Text> X </Text>
-                  </TouchableOpacity>
-                </View>
-              </TouchableHighlight>
-            );
-          }
-        }} keyExtractor={(list) => list.name}
-     />
-    </View>
-  );
+  render() {
+    const { navigation } = this.props;
+    const { board } = this.props;
+
+    return (
+      <View>
+        <FlatList
+          numColumns={1}
+          data={ Data.lists }
+          renderItem={ ({ item: { id, name, color, boardId}}) => {
+            if(boardId == board) {
+              return (
+                <TouchableHighlight style={{ backgroundColor: color } }
+                 onPress={() => { navigation.navigate('List', { list: id }) }} >
+                  <View style={ styles.list } >
+                    <Text style={{
+                      backgroundColor: color,
+                      fontSize: 20,
+                    }}>
+                      { name }
+                    </Text>
+                    <TouchableOpacity style={ styles.deleteButton }
+                     onPress={ () => this.deleteList(id) }>
+                      <Text> X </Text>
+                    </TouchableOpacity>
+                  </View>
+                </TouchableHighlight>
+              );
+            }
+          }} keyExtractor={(list) => list.name}
+       />
+      </View>
+    );
+  }
 }
 
 export default ListView
