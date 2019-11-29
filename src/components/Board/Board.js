@@ -33,8 +33,6 @@ class Board extends React.Component {
 		var update = navigation.getParam('update');
 		var boardData = Data.boards[this.findBoardIndex(id)];
 
-		console.log('Board: ' + update)
-
 		/*<View style={ styles.boardHeader }>
 			<Text style={ styles.boardHeaderText }> { boardData.name } </Text>
 			<Image
@@ -51,7 +49,7 @@ class Board extends React.Component {
 				 onPress={ () => this.createList() }>
 					<Text style={ styles.createListText }> + </Text>
 				</TouchableOpacity>
-				<Button title='Delete Board' onPress={ () => this.deleteBoard(id, navigation, update) } />
+				<Button color='#515b6b' title='Delete Board' onPress={ () => this.deleteBoard(id, navigation, update) } />
 			</View>
 		);
 	}

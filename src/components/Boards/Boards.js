@@ -16,7 +16,7 @@ class Boards extends React.Component { //= ( { navigation: navigate } ) => {
 		return(
 			<View style={styles.container}>
 				<TouchableHighlight style={ styles.createBoard } onPress={ () => {
-					navigation.navigate('CreateBoard', { navigation: navigation });
+					navigation.navigate('CreateBoard', { navigation: navigation, update: () => this.updateBoards() });
 				}}>
 					<Text style={ styles.createBoardText }> + </Text>
 				</TouchableHighlight>

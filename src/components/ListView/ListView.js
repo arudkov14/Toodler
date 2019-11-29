@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, FlatList, TouchableHighlight, TouchableOpacity, Button } from 'react-native';
+import { Text, View, FlatList, TouchableHighlight, TouchableOpacity, Button, Image } from 'react-native';
 import Data from '../../resources/data.json';
 import styles from './styles.js';
 
@@ -43,7 +43,11 @@ class ListView extends React.Component { //  = ( {navigation: { navigate }, boar
                     </Text>
                     <TouchableOpacity style={ styles.deleteButton }
                      onPress={ () => this.deleteList(id) }>
-                      <Text> X </Text>
+                       <Image
+                         style={ styles.removeIcon }
+                         resizeMode='cover'
+                         source={ require('../../../assets/close.png') }
+                        />
                     </TouchableOpacity>
                   </View>
                 </TouchableHighlight>

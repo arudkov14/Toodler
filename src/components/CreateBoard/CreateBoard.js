@@ -52,7 +52,6 @@ class CreateBoard extends React.Component {
 		const { boardTitle } = this.state;
 		const { boardThumbnail } = this.state;
 		const { description } = this.state;
-		const { navigation } = this.props;
 
 		if(boardTitle == '' || boardThumbnail == '') {
 			Alert.alert('One or more required fields are empty');
@@ -69,7 +68,18 @@ class CreateBoard extends React.Component {
 
 		Alert.alert(boardTitle + ' has been created!');
 		Vibration.vibrate(50);
-		this.props.navigation.pop();
+
+		const { navigation } = this.props;
+		/*
+		var update = navigation.getParam('update');
+		if(update !== undefined) {
+			update;
+			console.log(update);
+		} else {
+			console.log(update)
+		}
+		*/
+		navigation.pop();
 	}
 
 	render() {

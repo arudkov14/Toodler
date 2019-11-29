@@ -17,7 +17,13 @@ export default StyleSheet.create({
 	deleteButton: {
 		display: 'flex',
 		marginLeft: 'auto',
-		
+
+		width: 20,
+		height: 20,
+	},
+
+	removeIcon: {
+		marginTop: 5,
 		width: 20,
 		height: 20,
 	}
