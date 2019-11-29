@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, Vibration, Alert } from 'react-native';
+import { View, Text, TextInput, Button, Vibration, Alert, TouchableHighlight, Image } from 'react-native';
 import { takePhoto } from '../../services/imageService';
 import Data from '../../resources/data.json';
 import styles from './styles.js';
@@ -57,7 +57,7 @@ class CreateBoard extends React.Component {
 		if(boardTitle == '' || boardThumbnail == '') {
 			Alert.alert('One or more required fields are empty');
 			Vibration.vibrate(50);
-			return
+			return;
 		}
 
 		Data.boards.push({
@@ -75,28 +75,51 @@ class CreateBoard extends React.Component {
 	render() {
 		return (
 			<View style={ styles.container }>
-				<Text style={ styles.text }> Board Title </Text>
-				<TextInput style={ styles.inputBox }
-					autoCapitalize='sentences'
-				 	value={ this.state.boardTitle }
-					onChangeText={ title => this.updateTitle(title) }
-					required
-				/>
+				<View style={ styles.headerContainer }>
+					<Text style={ styles.text }> Create Board </Text>
+				</View>
 
-				<Text style={ styles.text }> Description (optional) </Text>
-				<TextInput style={ styles.inputBox }
-				 	value={ this.state.description }
-					onChangeText={ text => this.updateDescription(text) }
-				/>
+				<View style={ styles.inputContainer }>
+					<TextInput style={ styles.inputBox }
+					 	value={ this.state.boardTitle }
+						onChangeText={ title => this.updateTitle(title) }
+						placeholder='Board Title'
+						placeholderTextColor={ 'white' }
+						fontColor={ 'white' }
+					/>
 
-				<Text style={ styles.text }> Image Link </Text>
-				<TextInput style={ styles.inputBox }
-				 	value={ this.state.boardThumbnail }
-					onChangeText={ link => this.updateThumbnail(link) }
-					required
-				/>
-				<Button color='#515b6b' title='Take Photo' onPress={ () => this.takePhoto() } />
-				<Button color='#515b6b' title='Done' onPress={ () => this.submitBoard() }/>
+					<TextInput style={ styles.inputBox }
+					 	value={ this.state.description }
+						onChangeText={ text => this.updateDescription(text) }
+						placeholder='Description (optional)'
+						placeholderTextColor={ 'white' }
+					/>
+
+					<View style={ styles.imageContainer }>
+						<TextInput style={ styles.inputBoxImage }
+						 	value={ this.state.boardThumbnail }
+							onChangeText={ link => this.updateThumbnail(link) }
+							placeholder='Image'
+							placeholderTextColor={ 'white' }
+						/>
+
+						<TouchableHighlight style={ styles.photoBox }
+						 onPress={ () => this.takePhoto() } >
+						 <View>
+ 						 <Image
+ 							 style={ styles.cameraIcon }
+ 							 resizeMode='cover'
+ 							 source={ require('../../../assets/icon-camera-512.png') }
+ 							/>
+ 							</View>
+						</TouchableHighlight>
+					</View>
+				</View>
+
+				<TouchableHighlight style={ styles.submitButton }
+				 onPress={ () => this.submitBoard() } >
+					<Text style={ {color: '#fff'} }> Done </Text>
+				</TouchableHighlight>
 			</View>
 		);
 	}

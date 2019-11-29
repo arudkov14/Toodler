@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, FlatList, Button } from 'react-native';
-import Data from '../../resources/data.json'
+import { View, Text, FlatList, Button, TouchableHighlight } from 'react-native';
+import Data from '../../resources/data.json';
+import styles from './styles.js';
 
 class List extends React.Component{
   deleteTask(id) {
@@ -31,12 +32,25 @@ class List extends React.Component{
           renderItem={ ({ item: { id, name, description, isFinished, listId }}) => {
             if(id === null) { return; }
             if(listId == list) {
-              return(
-                <View>
-                  <Text> { name } </Text>
-                  <Button title='X' onPress={ () => this.deleteTask(id) } />
-                </View>
-              );
+              if(isFinished) {
+                return(
+                  <View style={ styles.task }>
+                    <Text style={{textDecorationLine: 'line-through'}}> { name } </Text>
+                    <TouchableHighlight style={ styles.deleteButton } onPress={ () => this.deleteTask(id) }>
+                      <Text> X </Text>
+                    </TouchableHighlight>
+                  </View>
+                );
+              } else {
+                return(
+                  <View style={ styles.task }>
+                    <Text> { name } </Text>
+                    <TouchableHighlight style={ styles.deleteButton } onPress={ () => this.deleteTask(id) }>
+                      <Text> X </Text>
+                    </TouchableHighlight>
+                  </View>
+                );
+              }
             }
           }} keyExtractor={(task) => task.name}
         />
