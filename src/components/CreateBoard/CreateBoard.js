@@ -69,7 +69,7 @@ class CreateBoard extends React.Component {
 
 		Alert.alert(boardTitle + ' has been created!');
 		Vibration.vibrate(50);
-		this.props.navigation.navigate('Boards');
+		this.props.navigation.pop();
 	}
 
 	render() {

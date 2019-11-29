@@ -2,42 +2,53 @@ import React from 'react';
 import { View, Text, FlatList, TouchableHighlight, useState } from 'react-native';
 import SwipeableViews from 'react-swipeable-views-native';
 import BoardThumbnail from '../BoardThumbnail/BoardThumbnail';
+import Data from '../../resources/data.json';
 import styles from './styles';
 
-const BoardView = ({ navigation: { navigate }, boardId, boardIndex, data }) => {
-	var boards = data.boards;
-
-	if(boards === undefined) {
-		return (
-			<View>
-			</View>
-		);
+class BoardView extends React.Component { //= ({ navigation: { navigate }, boardId, boardIndex, data }) => {
+	update() {
+		console.log('update')
+		this.forceUpdate();
 	}
 
-	return (
-		<FlatList
-			numColumns={2}
-			data={ boards }
-			renderItem={ ({ item: { id, name, thumbnailPhoto }}) => {
-				return (
-					<View>
-						<TouchableHighlight style={ styles.boardContainer } onPress={()=> {
-							navigate('Board', { navigation: navigate, id: id })
-						}}>
-							<View>
-								<View style={ styles.boardTitleContainer }>
-									<Text style={ styles.boardTitle }> { name } </Text>
+	render() {
+		const { navigation } = this.props;
+		const { boardId } = this.props;
+		const { boardIndex } = this.props;
+		var boards = Data.boards;
+
+		if(boards === undefined) {
+			return (
+				<View>
+				</View>
+			);
+		}
+
+		return (
+			<FlatList
+				numColumns={2}
+				data={ boards }
+				renderItem={ ({ item: { id, name, thumbnailPhoto }}) => {
+					return (
+						<View>
+							<TouchableHighlight style={ styles.boardContainer } onPress={()=> {
+								navigation.navigate('Board', { navigation: navigation, id: id, update: this.update() })
+							}}>
+								<View>
+									<View style={ styles.boardTitleContainer }>
+										<Text style={ styles.boardTitle }> { name } </Text>
+									</View>
+									<View style={ styles.thumbnail }>
+										<BoardThumbnail style={ styles.thumbnail } image={ thumbnailPhoto } />
+									</View>
 								</View>
-								<View style={ styles.thumbnail }>
-									<BoardThumbnail style={ styles.thumbnail } image={ thumbnailPhoto } />
-								</View>
-							</View>
-						</TouchableHighlight>
-					</View>
-				);
-			}}keyExtractor={ board => board.name}
-		/>
-	);
+							</TouchableHighlight>
+						</View>
+					);
+				}}keyExtractor={ board => board.name}
+			/>
+		);
+	}
 }
 
 export default BoardView;

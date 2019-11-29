@@ -10,11 +10,14 @@ class Board extends React.Component {
 	}
 
 	deleteBoard(id, navigation) {
+		const { update } = this.props;
 		delete Data.boards[this.findBoardIndex(id)];
 		Data.boards = Data.boards.filter(function(i) {
       return i != undefined;
     });
-		navigation.navigate('Main');
+
+		navigation.navigate('Boards');
+		update;
 	}
 
 	findBoardIndex(id) {
