@@ -2,15 +2,21 @@ import React from 'react';
 import { View, Text, FlatList, Button, TouchableOpacity, Image } from 'react-native';
 import styles from './styles.js';
 import ListView from '../ListView/ListView.js';
+import CreateList from '../CreateList/CreateList';
 import Data from '../../resources/data.json';
 
 class Board extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			creatingList: false,
+		};
 	}
 
-	createList() {
-		console.log('create')
+	createList(id) {
+		this.setState({
+			creatingList: true,
+		});
 	}
 
 	deleteBoard(id, navigation, update) {
@@ -31,7 +37,15 @@ class Board extends React.Component {
 		}
 	}
 
+	updateBoard() {
+		this.setState({
+			creatingList: false,
+		});
+		this.forceUpdate();
+	}
+
 	render() {
+		const { creatingList } = this.state;
 		const { navigation } = this.props;
 		var id = navigation.getParam('id');
 		var update = navigation.getParam('update');
@@ -46,16 +60,30 @@ class Board extends React.Component {
 			 />
 		</View>*/
 
-		return (
-			<View style={ styles.container }>
-				<ListView navigation={ navigation } board={ id } lists={ Data.lists } />
-				<TouchableOpacity style={ styles.createList }
-				 onPress={ () => this.createList() }>
-					<Text style={ styles.createListText }> + </Text>
-				</TouchableOpacity>
-				<Button color='#515b6b' title='Delete Board' onPress={ () => this.deleteBoard(id, navigation, update) } />
-			</View>
-		);
+		if(creatingList) {
+			return (
+				<View style={ styles.container }>
+					<ListView navigation={ navigation } board={ id } lists={ Data.lists } />
+					<CreateList boardId={ id } updateBoard={ () => this.updateBoard() }/>
+					<TouchableOpacity style={ styles.createList }
+					 onPress={ () => this.createList(id) }>
+						<Text style={ styles.createListText }> + </Text>
+					</TouchableOpacity>
+					<Button color='#515b6b' title='Delete Board' onPress={ () => this.deleteBoard(id, navigation, update) } />
+				</View>
+			);
+		} else {
+			return (
+				<View style={ styles.container }>
+					<ListView navigation={ navigation } board={ id } lists={ Data.lists } />
+					<TouchableOpacity style={ styles.createList }
+					 onPress={ () => this.createList(id) }>
+						<Text style={ styles.createListText }> + </Text>
+					</TouchableOpacity>
+					<Button color='#515b6b' title='Delete Board' onPress={ () => this.deleteBoard(id, navigation, update) } />
+				</View>
+			);
+		}
 	}
 }
 

@@ -4,6 +4,12 @@ import Data from '../../resources/data.json';
 import styles from './styles.js';
 
 class ListView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: this.props.list
+    }
+  }
   deleteList(id) {
     delete Data.lists[this.getListIndex(id)];
     Data.lists = Data.lists.filter(function(i) {
@@ -23,14 +29,14 @@ class ListView extends React.Component {
   render() {
     const { navigation } = this.props;
     const { board } = this.props;
-    const { lists } = this.props;
+
 
     return (
       <View>
         <FlatList
           numColumns={1}
           data={ Data.lists }
-          renderItem={ ({ item: { id, name, color, boardId}}) => {
+          renderItem={ ({ item: { id, name, color, boardId }}) => {
             if(boardId == board) {
               return (
                 <TouchableHighlight style={{ backgroundColor: color } }

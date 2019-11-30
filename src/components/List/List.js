@@ -1,10 +1,17 @@
 import React from 'react';
-import { View, Text, FlatList, Button, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
-import { CheckBox } from 'react-native';
+import { View, Text, FlatList, Button, TouchableHighlight, TouchableOpacity, Image, CheckBox } from 'react-native';
+import CreateTask from '../CreateTask/CreateTask';
 import Data from '../../resources/data.json';
 import styles from './styles.js';
 
 class List extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      creatingTask: false,
+    }
+  }
+
   toggleTaskFinished(id) {
     Data.tasks[this.getTaskIndex(id)].isFinished = true;
     this.forceUpdate();
@@ -16,7 +23,9 @@ class List extends React.Component{
   }
 
   createTask() {
-    console.log('create task')
+    this.setState({
+      creatingTask: true
+    });
   }
 
   deleteTask(id) {
@@ -46,6 +55,7 @@ class List extends React.Component{
           numColumns={1}
           data={ Data.tasks }
           renderItem={ ({ item: { id, name, description, isFinished, listId }}) => {
+            console.log(id)
             if(id === null) { return; }
             if(listId == list) {
               if(isFinished) {
@@ -88,6 +98,7 @@ class List extends React.Component{
             }
           }} keyExtractor={(task) => task.name}
         />
+        {this.state.creatingTask == true? <CreateTask />: null }
         <View style= { styles.createTaskContainer }>
           <TouchableOpacity style={ styles.createTask }
            onPress={ () => this.createTask() }>
