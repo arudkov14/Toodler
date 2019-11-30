@@ -3,7 +3,7 @@ import { Text, View, FlatList, TouchableHighlight, TouchableOpacity, Button, Ima
 import Data from '../../resources/data.json';
 import styles from './styles.js';
 
-class ListView extends React.Component { //  = ( {navigation: { navigate }, board} ) => {
+class ListView extends React.Component {
   deleteList(id) {
     delete Data.lists[this.getListIndex(id)];
     Data.lists = Data.lists.filter(function(i) {
@@ -23,6 +23,7 @@ class ListView extends React.Component { //  = ( {navigation: { navigate }, boar
   render() {
     const { navigation } = this.props;
     const { board } = this.props;
+    const { lists } = this.props;
 
     return (
       <View>

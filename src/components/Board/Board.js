@@ -5,6 +5,10 @@ import ListView from '../ListView/ListView.js';
 import Data from '../../resources/data.json';
 
 class Board extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
 	createList() {
 		console.log('create')
 	}
@@ -44,7 +48,7 @@ class Board extends React.Component {
 
 		return (
 			<View style={ styles.container }>
-				<ListView navigation={ navigation } board={ id } />
+				<ListView navigation={ navigation } board={ id } lists={ Data.lists } />
 				<TouchableOpacity style={ styles.createList }
 				 onPress={ () => this.createList() }>
 					<Text style={ styles.createListText }> + </Text>
