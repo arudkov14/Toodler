@@ -16,8 +16,8 @@ class CreateBoard extends React.Component {
 	}
 
 	assignBoardId() {
-		var id = Math.max.apply(Math, Data.boards.map(function(o) {
-			return o.id;
+		var id = Math.max.apply(Math, Data.boards.map(function(b) {
+			return b.id;
 		}))
 
 		this.setState({

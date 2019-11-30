@@ -63,15 +63,20 @@ export default StyleSheet.create({
 	headerContainer: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		borderWidth: 2,
-		width: 'auto',
+		alignSelf: 'center',
+		borderBottomWidth: 2,
+		borderColor: '#515b6b',
+		borderRadius: 6,
+		//borderWidth: 2
+		width: 294,
 		height: 70,
-		backgroundColor: '#515b6b',
+		//backgroundColor: '#515b6b',
 	},
 
 	text: {
 		fontSize: 30,
-		color: '#a4aebf',
+		//color: '#a4aebf',
+		color: '#fff',
 	},
 
 	cameraIcon: {
