@@ -1,5 +1,9 @@
 import React from 'react';
-import { View, Text, TextInput, Button, Vibration, Alert, TouchableHighlight } from 'react-native';
+import {
+	View, Text, TextInput, Button,
+	Vibration, Alert, TouchableHighlight,
+	TouchableOpacity, Image
+} from 'react-native';
 import Data from '../../resources/data.json';
 import styles from './styles.js';
 
@@ -37,9 +41,6 @@ class CreateTask extends React.Component {
 		const { name } = this.state;
     const { description } = this.state;
     const { listId } = this.props;
-    const { updateList } = this.props;
-
-		console.log(listId);
 
 		if(name == '') {
 			Alert.alert('One or more required fields are empty');
@@ -58,12 +59,24 @@ class CreateTask extends React.Component {
 		Alert.alert(name + ' has been created!');
 		Vibration.vibrate(50);
     this.forceUpdate();
-    updateList();
+		this.close();
+	}
+
+	close() {
+		const { updateList } = this.props;
+		updateList();
 	}
 
 	render() {
 		return (
 			<View style={ styles.container }>
+				<TouchableOpacity style={ styles.removeIcon } onPress={ () => this.close() }>
+					<Image
+					 style={ styles.removeIcon }
+					 resizeMode='cover'
+					 source={ require('../../../assets/close.png') }
+					/>
+				</TouchableOpacity>
 				<View style={ { backgroundColor: this.state.color } }>
 					<View style={ styles.inputContainer }>
 						<TextInput style={ styles.inputBox }

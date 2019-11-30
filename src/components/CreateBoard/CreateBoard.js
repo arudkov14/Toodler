@@ -46,7 +46,6 @@ class CreateBoard extends React.Component {
 	}
 
 	submitBoard() {
-		console.log(this.assignBoardId());
 		const { boardTitle } = this.state;
 		const { boardThumbnail } = this.state;
 		const { description } = this.state;
@@ -68,15 +67,6 @@ class CreateBoard extends React.Component {
 		Vibration.vibrate(50);
 
 		const { navigation } = this.props;
-		/*
-		var update = navigation.getParam('update');
-		if(update !== undefined) {
-			update;
-			console.log(update);
-		} else {
-			console.log(update)
-		}
-		*/
 		navigation.pop();
 	}
 

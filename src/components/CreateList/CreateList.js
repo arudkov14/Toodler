@@ -41,8 +41,6 @@ class CreateList extends React.Component {
     const { boardId } = this.props;
     const { updateBoard } = this.props;
 
-		console.log('bord id: ' + boardId);
-
 		if(name == '') {
 			Alert.alert('One or more required fields are empty');
 			Vibration.vibrate(50);
@@ -55,8 +53,6 @@ class CreateList extends React.Component {
 			color: color,
 			boardId: boardId,
 		});
-
-		console.log(this.state.id)
 
 		Alert.alert(name + ' has been created!');
 		Vibration.vibrate(50);

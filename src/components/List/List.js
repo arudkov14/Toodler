@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, Button, TouchableHighlight, TouchableOpacity, Image, CheckBox } from 'react-native';
 import CreateTask from '../CreateTask/CreateTask';
+import MoveTask from '../MoveTask/MoveTask';
 import Data from '../../resources/data.json';
 import styles from './styles.js';
 
@@ -9,6 +10,7 @@ class List extends React.Component{
     super(props);
     this.state = {
       creatingTask: false,
+      taskToMove: '',
     }
   }
 
@@ -25,6 +27,12 @@ class List extends React.Component{
   createTask() {
     this.setState({
       creatingTask: true
+    });
+  }
+
+  moveTask(id) {
+    this.setState({
+      taskToMove: id,
     });
   }
 
@@ -47,6 +55,7 @@ class List extends React.Component{
   update() {
     this.setState({
       creatingTask: false,
+      taskToMove: '',
     });
     this.forceUpdate();
   }
@@ -54,6 +63,7 @@ class List extends React.Component{
   render() {
     const { navigation } = this.props;
     var list = navigation.getParam('list');
+    var boardId = navigation.getParam('board');
 
     return(
       <View style={ styles.container }>
@@ -67,39 +77,43 @@ class List extends React.Component{
               if(listId == list) {
                 if(isFinished) {
                   return(
-                    <View style={ styles.taskFinished }>
-                      <View style={ styles.taskContainer }>
-                        <CheckBox style={ styles.checkBox } value={ isFinished } onValueChange={ () => this.toggleTaskUnfinished(id) } />
-                        <Text style={{textDecorationLine: 'line-through'}}>
-                          <Text style={ styles.taskTitle }> { name } </Text>
-                        </Text>
-                        <TouchableHighlight style={ styles.deleteButton } onPress={ () => this.deleteTask(id) }>
-                          <Image
-                            style={ styles.removeIcon }
-                            resizeMode='cover'
-                            source={ require('../../../assets/close.png') }
-                           />
-                        </TouchableHighlight>
+                    <TouchableOpacity onPress={() => this.moveTask(id) }>
+                      <View style={ styles.taskFinished }>
+                        <View style={ styles.taskContainer }>
+                          <CheckBox style={ styles.checkBox } value={ isFinished } onValueChange={ () => this.toggleTaskUnfinished(id) } />
+                          <Text style={{textDecorationLine: 'line-through'}}>
+                            <Text style={ styles.taskTitle }> { name } </Text>
+                          </Text>
+                          <TouchableHighlight style={ styles.deleteButton } onPress={ () => this.deleteTask(id) }>
+                            <Image
+                              style={ styles.removeIcon }
+                              resizeMode='cover'
+                              source={ require('../../../assets/close.png') }
+                             />
+                          </TouchableHighlight>
+                        </View>
+                        <Text style={ styles.taskDescription }> { description } </Text>
                       </View>
-                      <Text style={ styles.taskDescription }> { description } </Text>
-                    </View>
+                    </TouchableOpacity>
                   );
                 } else {
                   return(
-                    <View style={ styles.taskUnfinished }>
-                      <View style={ styles.taskContainer }>
-                        <CheckBox style={ styles.checkBox } value={ isFinished } onValueChange={ () => this.toggleTaskFinished(id) } />
-                        <Text style={ styles.taskTitle }> { name } </Text>
-                        <TouchableHighlight style={ styles.deleteButton } onPress={ () => this.deleteTask(id) }>
-                          <Image
-                            style={ styles.removeIcon }
-                            resizeMode='cover'
-                            source={ require('../../../assets/close.png') }
-                           />
-                        </TouchableHighlight>
+                    <TouchableOpacity onPress={() => this.moveTask(id) }>
+                      <View style={ styles.taskUnfinished }>
+                        <View style={ styles.taskContainer }>
+                          <CheckBox style={ styles.checkBox } value={ isFinished } onValueChange={ () => this.toggleTaskFinished(id) } />
+                          <Text style={ styles.taskTitle }> { name } </Text>
+                          <TouchableHighlight style={ styles.deleteButton } onPress={ () => this.deleteTask(id) }>
+                            <Image
+                              style={ styles.removeIcon }
+                              resizeMode='cover'
+                              source={ require('../../../assets/close.png') }
+                             />
+                          </TouchableHighlight>
+                        </View>
+                        <Text style={ styles.taskDescription }> { description } </Text>
                       </View>
-                      <Text style={ styles.taskDescription }> { description } </Text>
-                    </View>
+                    </TouchableOpacity>
                   );
                 }
               }
@@ -112,6 +126,7 @@ class List extends React.Component{
             </TouchableOpacity>
           </View>
           {this.state.creatingTask == true ? <CreateTask listId={ list } updateList={ () => this.update() } />: null }
+          {this.state.taskToMove != '' ? <MoveTask board={ boardId } taskId={ this.state.taskToMove } updateList={ () => this.update() } />: null }
         </View>
       </View>
     );

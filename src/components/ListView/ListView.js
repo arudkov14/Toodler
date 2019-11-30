@@ -30,7 +30,6 @@ class ListView extends React.Component {
     const { navigation } = this.props;
     const { board } = this.props;
 
-
     return (
       <View>
         <FlatList
@@ -40,7 +39,7 @@ class ListView extends React.Component {
             if(boardId == board) {
               return (
                 <TouchableHighlight style={{ backgroundColor: color } }
-                 onPress={() => { navigation.navigate('List', { list: id }) }} >
+                 onPress={() => { navigation.navigate('List', { list: id, board: board }) }} >
                   <View style={ styles.list } >
                     <Text style={{
                       backgroundColor: color,
