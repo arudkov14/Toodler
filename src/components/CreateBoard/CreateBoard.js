@@ -18,11 +18,8 @@ class CreateBoard extends React.Component {
 	assignBoardId() {
 		var id = Math.max.apply(Math, Data.boards.map(function(b) {
 			return b.id;
-		}))
-
-		this.setState({
-			boardId: id + 1,
-		});
+		}));
+		return id + 1;
 	}
 
 	updateTitle(title) {
@@ -49,6 +46,7 @@ class CreateBoard extends React.Component {
 	}
 
 	submitBoard() {
+		console.log(this.assignBoardId());
 		const { boardTitle } = this.state;
 		const { boardThumbnail } = this.state;
 		const { description } = this.state;

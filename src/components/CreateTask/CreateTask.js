@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, TextInput, Button, Vibration, Alert, TouchableHighlight } from 'react-native';
-import ColorPicker from '../ColorPicker/ColorPicker';
 import Data from '../../resources/data.json';
 import styles from './styles.js';
 
@@ -18,11 +17,8 @@ class CreateTask extends React.Component {
 	assignTaskId() {
 		var id = Math.max.apply(Math, Data.tasks.map(function(b) {
 			return b.id;
-		}))
-
-		this.setState({
-			id: id + 1,
-		});
+		}));
+		return id + 1;
 	}
 
 	updateTitle(title) {
@@ -31,11 +27,19 @@ class CreateTask extends React.Component {
 		});
 	}
 
+	updateDescription(desc) {
+		this.setState({
+			description: desc,
+		});
+	}
+
 	submitTask() {
 		const { name } = this.state;
     const { description } = this.state;
-    const { boardId } = this.props;
-    const { updateBoard } = this.props;
+    const { listId } = this.props;
+    const { updateList } = this.props;
+
+		console.log(listId);
 
 		if(name == '') {
 			Alert.alert('One or more required fields are empty');
@@ -46,14 +50,15 @@ class CreateTask extends React.Component {
 		Data.tasks.push({
 			id: this.assignTaskId(),
 			name: name,
-			color: color,
-			boardId:  boardId,
+			description: description,
+			isFinished: false,
+			listId:  listId,
 		});
 
 		Alert.alert(name + ' has been created!');
 		Vibration.vibrate(50);
     this.forceUpdate();
-    updateBoard();
+    updateList();
 	}
 
 	render() {
@@ -64,16 +69,22 @@ class CreateTask extends React.Component {
 						<TextInput style={ styles.inputBox }
 						 	value={ this.state.name }
 							onChangeText={ title => this.updateTitle(title) }
-							placeholder='List Title'
+							placeholder='Task Title'
+							placeholderTextColor={ 'white' }
+							fontColor={ 'white' }
+						/>
+
+						<TextInput style={ styles.inputBox }
+						 	value={ this.state.description }
+							onChangeText={ title => this.updateDescription(title) }
+							placeholder='Description'
 							placeholderTextColor={ 'white' }
 							fontColor={ 'white' }
 						/>
 					</View>
 
-	        <ColorPicker updateColor={ (color) => this.updateColor(color) }/>
-
 					<TouchableHighlight style={ styles.submitButton }
-					 onPress={ () => this.submitList() } >
+					 onPress={ () => this.submitTask() } >
 						<Text style={ {color: '#fff'} }> Done </Text>
 					</TouchableHighlight>
 				</View>

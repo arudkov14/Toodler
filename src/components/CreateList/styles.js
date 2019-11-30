@@ -51,4 +51,18 @@ export default StyleSheet.create({
 		//color: '#a4aebf',
 		color: '#fff',
 	},
+
+	removeIcon: {
+		width: 20,
+		height: 20,
+	},
+
+	deleteButton: {
+		marginTop: 10,
+		display: 'flex',
+		marginLeft: 'auto',
+		marginRight: 20,
+		width: 20,
+		height: 20,
+	},
 });

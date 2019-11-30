@@ -2,70 +2,66 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
 	container: {
-		flex: 1,
     backgroundColor: '#252c38',
-    justifyContent: 'center',
+		borderTopWidth: 2,
   },
 
-	subContainer: {
-		marginBottom: 'auto',
+	inputContainer: {
+		alignItems: 'center'
 	},
 
-	createTaskContainer: {
-		marginBottom: 'auto',
-		backgroundColor: '#252c38',
-	},
-
-	createTask: {
-		marginBottom: 'auto',
-		backgroundColor: '#515b6b',
-		padding: 15,
-	},
-
-	createTaskText: {
-		color: '#fff',
-		alignSelf: 'center',
+	inputBox: {
+		borderWidth: 2,
+		backgroundColor: '#a4aebf',
+		borderRadius: 6,
+		width: 300,
+		padding: 10,
+		justifyContent: 'center',
 		fontSize: 20,
+		marginTop: 20,
 	},
 
-	taskFinished: {
+	submitButton: {
+		borderWidth: 2,
+		backgroundColor: '#515b6b',
 		padding: 10,
-		backgroundColor: '#39ed6c',
+		marginTop: 10,
+		marginBottom: 5,
+		borderRadius: 6,
+		width: 200,
+		alignItems: 'center',
+		alignSelf: 'center',
+	},
+
+	headerContainer: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignSelf: 'center',
 		borderBottomWidth: 2,
+		borderColor: '#515b6b',
+		borderRadius: 6,
+		//borderWidth: 2
+		width: 294,
+		height: 70,
+		//backgroundColor: '#515b6b',
 	},
 
-	taskUnfinished: {
-		padding: 10,
-		backgroundColor: '#ed1c54',
-		borderBottomWidth: 2,
-	},
-
-	taskTitle: {
-		fontSize: 18,
-	},
-
-	taskContainer: {
-		display: 'flex',
-		flexDirection: 'row',
-		padding: 10,
-
-	},
-
-	taskDescription: {
-		marginTop: 'auto',
-
-	},
-
-	checkBox: {
-
-	},
-
-	deleteButton: {
-		marginLeft: 'auto',
+	text: {
+		fontSize: 30,
+		//color: '#a4aebf',
+		color: '#fff',
 	},
 
 	removeIcon: {
-		marginTop: 5,
+		width: 20,
+		height: 20,
+	},
+
+	deleteButton: {
+		marginTop: 10,
+		display: 'flex',
+		marginLeft: 'auto',
+		marginRight: 20,
 		width: 20,
 		height: 20,
 	},

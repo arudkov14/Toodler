@@ -37,4 +37,9 @@ export default StyleSheet.create({
 		color: '#fff',
 		fontSize: 30,
 	},*/
+	removeIcon: {
+		marginTop: 5,
+		width: 20,
+		height: 20,
+	},
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, Vibration, Alert, TouchableHighlight } from 'react-native';
+import { View, Text, TextInput, Button, Vibration, Alert, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import Data from '../../resources/data.json';
 import styles from './styles.js';
@@ -18,11 +18,8 @@ class CreateList extends React.Component {
 	assignListId() {
 		var id = Math.max.apply(Math, Data.lists.map(function(b) {
 			return b.id;
-		}))
-
-		this.setState({
-			id: id + 1,
-		});
+		}));
+		return id + 1;
 	}
 
 	updateTitle(title) {
@@ -44,6 +41,8 @@ class CreateList extends React.Component {
     const { boardId } = this.props;
     const { updateBoard } = this.props;
 
+		console.log('bord id: ' + boardId);
+
 		if(name == '') {
 			Alert.alert('One or more required fields are empty');
 			Vibration.vibrate(50);
@@ -54,8 +53,10 @@ class CreateList extends React.Component {
 			id: this.assignListId(),
 			name: name,
 			color: color,
-			boardId:  boardId,
+			boardId: boardId,
 		});
+
+		console.log(this.state.id)
 
 		Alert.alert(name + ' has been created!');
 		Vibration.vibrate(50);
@@ -67,6 +68,14 @@ class CreateList extends React.Component {
 		return (
 			<View style={ styles.container }>
 				<View style={ { backgroundColor: this.state.color } }>
+					<TouchableOpacity style={ styles.deleteButton }
+					 onPress={ () => this.props.updateBoard() }>
+						 <Image
+							 style={ styles.removeIcon }
+							 resizeMode='cover'
+							 source={ require('../../../assets/close.png') }
+							/>
+					</TouchableOpacity>
 					<View style={ styles.inputContainer }>
 						<TextInput style={ styles.inputBox }
 						 	value={ this.state.name }
@@ -76,7 +85,6 @@ class CreateList extends React.Component {
 							fontColor={ 'white' }
 						/>
 					</View>
-
 	        <ColorPicker updateColor={ (color) => this.updateColor(color) }/>
 
 					<TouchableHighlight style={ styles.submitButton }

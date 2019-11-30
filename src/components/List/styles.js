@@ -12,12 +12,11 @@ export default StyleSheet.create({
 	},
 
 	createTaskContainer: {
-		marginBottom: 'auto',
+		
 		backgroundColor: '#252c38',
 	},
 
 	createTask: {
-		marginBottom: 'auto',
 		backgroundColor: '#515b6b',
 		padding: 15,
 	},

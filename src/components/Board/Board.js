@@ -44,6 +44,12 @@ class Board extends React.Component {
 		this.forceUpdate();
 	}
 
+	closeCreateList() {
+		this.setState({
+			creatingList: false,
+		});
+	}
+
 	render() {
 		const { creatingList } = this.state;
 		const { navigation } = this.props;
@@ -65,6 +71,7 @@ class Board extends React.Component {
 				<View style={ styles.container }>
 					<ListView navigation={ navigation } board={ id } lists={ Data.lists } />
 					<CreateList boardId={ id } updateBoard={ () => this.updateBoard() }/>
+					
 					<TouchableOpacity style={ styles.createList }
 					 onPress={ () => this.createList(id) }>
 						<Text style={ styles.createListText }> + </Text>

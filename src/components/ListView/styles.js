@@ -26,5 +26,19 @@ export default StyleSheet.create({
 		marginTop: 5,
 		width: 20,
 		height: 20,
+	},
+
+	closeButton: {
+		display: 'flex',
+		marginLeft: 'auto',
+
+		width: 20,
+		height: 20,
+	},
+
+	closeIcon: {
+		marginTop: 5,
+		width: 20,
+		height: 20,
 	}
 });
