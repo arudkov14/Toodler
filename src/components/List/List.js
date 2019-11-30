@@ -38,13 +38,14 @@ class List extends React.Component{
   render() {
     const { navigation } = this.props;
     var list = navigation.getParam('list');
-
+    console.log(Data.tasks);
     return(
       <View style={ styles.container }>
         <View style={ styles.subContainer }>
         <FlatList
           numColumns={1}
           data={ Data.tasks }
+          initialNumToRender={50}
           renderItem={ ({ item: { id, name, description, isFinished, listId }}) => {
             if(id === null) { return; }
             if(listId == list) {

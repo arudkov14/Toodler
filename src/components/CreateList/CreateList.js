@@ -35,7 +35,6 @@ class CreateList extends React.Component {
     this.setState({
       color: color
     });
-    console.log(color)
   }
 
 	submitList() {

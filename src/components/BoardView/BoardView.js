@@ -27,6 +27,7 @@ class BoardView extends React.Component { //= ({ navigation: { navigate }, board
 			<FlatList
 				numColumns={2}
 				data={ boards }
+				initialNumToRender={50}
 				renderItem={ ({ item: { id, name, thumbnailPhoto }}) => {
 					return (
 						<View>
